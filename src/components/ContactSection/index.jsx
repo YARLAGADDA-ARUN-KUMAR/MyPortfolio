@@ -9,24 +9,40 @@ import {
 } from "lucide-react";
 import cn from "../../lib/utils"
 import { useToast } from "../../hooks/useToast";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export const ContactSection = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const formRef = useRef(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     setIsSubmitting(true);
 
-    setTimeout(() => {
+    const formData = new FormData(e.target);
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
       toast({
         title: "Message sent!",
         description: "Thank you for your message. I'll get back to you soon.",
       });
-      setIsSubmitting(false);
-    }, 1500);
+      formRef.current.reset();
+    } else {
+      toast({
+        title: "Error!",
+        description: "Something went wrong. Please try again later.",
+        variant: "destructive",
+      });
+    }
+
+    setIsSubmitting(false);
   };
   return (
     <section id="contact" className="py-24 px-4 relative bg-secondary/30">
@@ -107,11 +123,11 @@ export const ContactSection = () => {
 
           <div
             className="bg-card p-8 rounded-lg shadow-xs"
-            onSubmit={handleSubmit}
           >
             <h3 className="text-2xl font-semibold mb-6"> Send a Message</h3>
 
-            <form className="space-y-6">
+            <form ref={formRef} className="space-y-6" onSubmit={handleSubmit}>
+              <input type="hidden" name="access_key" value="616dd377-f0b0-4eb1-993c-26d06b5933ba" />
               <div>
                 <label
                   htmlFor="name"
