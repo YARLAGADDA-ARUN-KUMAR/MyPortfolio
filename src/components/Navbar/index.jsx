@@ -10,7 +10,7 @@ const navItems = [
   { name: "Contact", href: "#contact" },
 ];
 
-export default function Navbar () {
+export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -88,4 +88,4 @@ export default function Navbar () {
       </div>
     </nav>
   );
-};
+}

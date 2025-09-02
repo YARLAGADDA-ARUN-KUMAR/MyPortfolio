@@ -22,9 +22,9 @@ export const AboutSection = () => {
             </p>
 
             <p className="text-muted-foreground">
-              I am enthusiastic about turning ideas into reality through code and
-              am always eager to learn and apply new skills in the dynamic world
-              of web development.
+              I am enthusiastic about turning ideas into reality through code
+              and am always eager to learn and apply new skills in the dynamic
+              world of web development.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">

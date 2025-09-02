@@ -1,5 +1,5 @@
 import {
-    Github,
+  Github,
   Instagram,
   Linkedin,
   Mail,
@@ -7,7 +7,7 @@ import {
   Phone,
   Send,
 } from "lucide-react";
-import cn from "../../lib/utils"
+import cn from "../../lib/utils";
 import { useToast } from "../../hooks/useToast";
 import { useRef, useState } from "react";
 
@@ -108,26 +108,37 @@ export const ContactSection = () => {
             <div className="pt-8">
               <h4 className="font-medium mb-4"> Connect With Me</h4>
               <div className="flex space-x-4 justify-center">
-                <a href="https://www.linkedin.com/in/arun-kumar-yarlagadda-4a9a09323/" target="_blank">
+                <a
+                  href="https://www.linkedin.com/in/arun-kumar-yarlagadda-4a9a09323/"
+                  target="_blank"
+                >
                   <Linkedin />
                 </a>
-                <a href="https://github.com/YARLAGADDA-ARUN-KUMAR" target="_blank">
-                    <Github />
+                <a
+                  href="https://github.com/YARLAGADDA-ARUN-KUMAR"
+                  target="_blank"
+                >
+                  <Github />
                 </a>
-                <a href="https://www.instagram.com/simply_arun07/" target="_blank">
+                <a
+                  href="https://www.instagram.com/simply_arun07/"
+                  target="_blank"
+                >
                   <Instagram />
                 </a>
               </div>
             </div>
           </div>
 
-          <div
-            className="bg-card p-8 rounded-lg shadow-xs"
-          >
+          <div className="bg-card p-8 rounded-lg shadow-xs">
             <h3 className="text-2xl font-semibold mb-6"> Send a Message</h3>
 
             <form ref={formRef} className="space-y-6" onSubmit={handleSubmit}>
-              <input type="hidden" name="access_key" value="616dd377-f0b0-4eb1-993c-26d06b5933ba" />
+              <input
+                type="hidden"
+                name="access_key"
+                value="616dd377-f0b0-4eb1-993c-26d06b5933ba"
+              />
               <div>
                 <label
                   htmlFor="name"

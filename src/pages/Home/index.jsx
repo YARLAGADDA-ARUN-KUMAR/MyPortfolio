@@ -1,5 +1,13 @@
-import { AboutSection, ContactSection, HeroSection, Navbar, ProjectsSection, SkillsSection, StarBackground, ToggleTheme} from "../../components/index";
-
+import {
+  AboutSection,
+  ContactSection,
+  HeroSection,
+  Navbar,
+  ProjectsSection,
+  SkillsSection,
+  StarBackground,
+  ToggleTheme,
+} from "../../components/index";
 
 export default function Home() {
   return (
@@ -13,5 +21,5 @@ export default function Home() {
       <ProjectsSection />
       <ContactSection />
     </div>
-  )
-};
+  );
+}

@@ -7,7 +7,8 @@ const projects = [
     description: "An application that helps you to store your notes",
     image: "/src/assets/project1.png",
     tags: ["React", "TailwindCSS"],
-    demoUrl: "https://my-notes-lk1mv3q0x-yarlagadda-arun-kumars-projects.vercel.app/",
+    demoUrl:
+      "https://my-notes-lk1mv3q0x-yarlagadda-arun-kumars-projects.vercel.app/",
     githubUrl: "https://github.com/YARLAGADDA-ARUN-KUMAR/MyNotes",
   },
   {
