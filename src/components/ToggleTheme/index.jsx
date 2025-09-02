@@ -5,7 +5,7 @@ import cn from "../../lib/utils";
 export default function ToggleTheme() {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const storedTheme = localStorage.getItem("theme");
-    return storedTheme === "dark";
+    return storedTheme !== "light";
   });
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function ToggleTheme() {
     <button
       onClick={toggleTheme}
       className={cn(
-        "fixed max-sm:hidden top-5 right-5 z-100 p-2 rounded-full transition-colors duration-300",
+        "fixed top-5 md:right-5 right-20 z-50 p-2 rounded-full transition-colors duration-300",
         "focus:outline-none"
       )}
     >
