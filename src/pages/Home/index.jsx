@@ -4,6 +4,7 @@ import {
   HeroSection,
   Navbar,
   ProjectsSection,
+  AchievementsSection,
   SkillsSection,
   StarBackground,
   ToggleTheme,
@@ -19,6 +20,7 @@ export default function Home() {
       <AboutSection />
       <SkillsSection />
       <ProjectsSection />
+      <AchievementsSection />
       <ContactSection />
     </div>
   );
