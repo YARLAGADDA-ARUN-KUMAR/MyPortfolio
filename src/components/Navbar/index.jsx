@@ -1,6 +1,14 @@
 import cn from "../../lib/utils";
 import { Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { motion, AnimatePresence, useMotionValueEvent, useScroll } from "framer-motion";
+
+// ============================================
+// FLOATING GLASS NAVIGATION
+// Centered pill, auto-hide on scroll down,
+// show on scroll up, active section indicator,
+// magnetic hover effect
+// ============================================
 
 const navItems = [
   { name: "Home", href: "#hero" },
@@ -12,81 +20,169 @@ const navItems = [
 ];
 
 export default function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero");
+  const [hasScrolled, setHasScrolled] = useState(false);
+  const lastScrollY = useRef(0);
+  const { scrollY } = useScroll();
 
+  // Auto-hide on scroll down, show on scroll up
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const diff = latest - lastScrollY.current;
+    setHasScrolled(latest > 50);
+
+    if (diff > 5 && latest > 100) {
+      setIsVisible(false);
+    } else if (diff < -5) {
+      setIsVisible(true);
+    }
+
+    lastScrollY.current = latest;
+  });
+
+  // Track active section via IntersectionObserver
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
+    const sections = navItems.map((item) =>
+      document.querySelector(item.href)
+    );
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.3, rootMargin: "-10% 0px -60% 0px" }
+    );
+
+    sections.forEach((section) => {
+      if (section) observer.observe(section);
+    });
+
+    return () => observer.disconnect();
   }, []);
-  return (
-    <nav
-      className={cn(
-        "fixed w-full z-40 transition-all duration-300",
-        isScrolled ? "py-3 bg-background/80 backdrop-blur-md shadow-xs" : "py-5"
-      )}
-    >
-      <div className="container flex items-center justify-between">
-        <a
-          className="text-xl font-bold text-primary flex items-center"
-          href="#hero"
-        >
-          <span className="relative z-10">
-            <span className="text-glow text-foreground"> Arun Kumar </span>{" "}
-            Portfolio
-          </span>
-        </a>
 
-        {/* desktop nav */}
-        <div className="hidden md:flex space-x-8">
-          {navItems.map((item, key) => (
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    const target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+    setIsMenuOpen(false);
+  };
+
+  return (
+    <>
+      {/* Desktop floating nav */}
+      <motion.nav
+        className="fixed top-6 left-1/2 z-50 hidden md:block"
+        style={{ x: "-50%" }}
+        initial={{ y: -100, opacity: 0 }}
+        animate={{
+          y: isVisible ? 0 : -100,
+          opacity: isVisible ? 1 : 0,
+        }}
+        transition={{ type: "spring", stiffness: 200, damping: 30 }}
+      >
+        <div
+          className={cn(
+            "flex items-center gap-1 px-2 py-2 rounded-full transition-all duration-500",
+            hasScrolled
+              ? "glass shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
+              : "bg-transparent"
+          )}
+        >
+          {navItems.map((item) => (
             <a
-              key={key}
+              key={item.name}
               href={item.href}
-              className="text-foreground/80 hover:text-primary transition-colors duration-300"
+              onClick={(e) => handleNavClick(e, item.href)}
+              className={cn(
+                "relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-300",
+                activeSection === item.href.slice(1)
+                  ? "text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              )}
+              data-cursor-hover
             >
-              {item.name}
+              {/* Active indicator background */}
+              {activeSection === item.href.slice(1) && (
+                <motion.span
+                  layoutId="nav-active"
+                  className="absolute inset-0 rounded-full bg-primary/20 border border-primary/30"
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 30,
+                  }}
+                />
+              )}
+              <span className="relative z-10">{item.name}</span>
             </a>
           ))}
         </div>
+      </motion.nav>
 
-        {/* mobile nav */}
+      {/* Mobile hamburger button */}
+      <motion.button
+        onClick={() => setIsMenuOpen((prev) => !prev)}
+        className="fixed top-6 right-6 md:hidden p-3 rounded-full glass z-50"
+        aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: isVisible || isMenuOpen ? 1 : 0,
+          y: isVisible || isMenuOpen ? 0 : -20,
+        }}
+        transition={{ duration: 0.3 }}
+        data-cursor-hover
+      >
+        {isMenuOpen ? (
+          <X size={20} className="text-foreground" />
+        ) : (
+          <Menu size={20} className="text-foreground" />
+        )}
+      </motion.button>
 
-        <button
-          onClick={() => setIsMenuOpen((prev) => !prev)}
-          className="md:hidden p-2 text-foreground z-50"
-          aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}{" "}
-        </button>
-
-        <div
-          className={cn(
-            "fixed inset-0 bg-background/95 backdroup-blur-md z-40 flex flex-col items-center justify-center",
-            "transition-all duration-300 md:hidden",
-            isMenuOpen
-              ? "opacity-100 pointer-events-auto"
-              : "opacity-0 pointer-events-none"
-          )}
-        >
-          <div className="flex flex-col space-y-8 text-xl">
-            {navItems.map((item, key) => (
-              <a
-                key={key}
-                href={item.href}
-                className="text-foreground/80 hover:text-primary transition-colors duration-300"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
-    </nav>
+      {/* Mobile fullscreen overlay */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            className="fixed inset-0 bg-background/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <nav className="flex flex-col items-center gap-8">
+              {navItems.map((item, index) => (
+                <motion.a
+                  key={item.name}
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                  className={cn(
+                    "text-2xl font-display font-semibold transition-colors duration-300",
+                    activeSection === item.href.slice(1)
+                      ? "text-primary"
+                      : "text-muted-foreground hover:text-foreground"
+                  )}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.4,
+                    delay: index * 0.08,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                >
+                  {item.name}
+                </motion.a>
+              ))}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
