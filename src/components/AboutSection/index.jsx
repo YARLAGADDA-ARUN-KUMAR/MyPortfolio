@@ -15,6 +15,23 @@ const fadeInUp = {
   transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
 };
 
+// Helper to highlight numbers/metrics in text
+function HighlightDetail({ text }) {
+  // Highlight patterns like "CGPA: 9.4 / 10.0", "97.6%", "91.83%"
+  const parts = text.split(/(CGPA:\s*[\d./\s]+|\d+\.?\d*%|\d+\.\d+\s*\/\s*\d+\.\d+)/);
+  return (
+    <>
+      {parts.map((part, i) =>
+        /CGPA|%|\//.test(part) ? (
+          <span key={i} className="text-primary font-bold">{part}</span>
+        ) : (
+          <span key={i}>{part}</span>
+        )
+      )}
+    </>
+  );
+}
+
 export const AboutSection = () => {
   const timeline = [
     {
@@ -105,7 +122,7 @@ export const AboutSection = () => {
                 {focusAreas.map((focus, index) => (
                   <motion.div
                     key={index}
-                    className="group flex items-start gap-4 p-5 rounded-xl border border-border/50 bg-card/20 backdrop-blur-xs hover:border-primary/30 hover:bg-card/40 transition-all duration-500"
+                    className="group flex items-start gap-4 p-5 rounded-xl border border-border bg-card/60 backdrop-blur-sm hover:border-primary/40 hover:bg-card transition-all duration-500"
                     initial={{ opacity: 0, x: -30 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, amount: 0.3 }}
@@ -171,22 +188,22 @@ export const AboutSection = () => {
                   </div>
 
                   {/* Content card */}
-                  <div className="p-5 rounded-xl border border-border/30 bg-card/10 hover:bg-card/30 hover:border-border/60 transition-all duration-500 space-y-2">
+                  <div className="p-5 rounded-xl border border-border/60 bg-card/50 hover:bg-card/80 hover:border-border transition-all duration-500 space-y-2">
                     <span className="text-[10px] font-mono tracking-[0.15em] text-primary/70 uppercase">
                       {item.period}
                     </span>
                     <h4 className="text-sm font-bold text-foreground leading-snug">
                       {item.title}
                     </h4>
-                    <p className="text-xs font-medium text-muted-foreground">
+                    <p className="text-xs font-semibold text-foreground/70">
                       {item.institution}
                     </p>
                     {item.details && (
-                      <ul className="space-y-1.5 mt-3 text-xs text-muted-foreground/80 leading-relaxed">
+                      <ul className="space-y-1.5 mt-3 text-sm text-foreground/80 leading-relaxed">
                         {item.details.map((detail, idx) => (
                           <li key={idx} className="flex gap-2 items-start">
-                            <span className="text-primary/50 mt-0.5">›</span>
-                            <span>{detail}</span>
+                            <span className="text-primary mt-0.5">›</span>
+                            <span><HighlightDetail text={detail} /></span>
                           </li>
                         ))}
                       </ul>

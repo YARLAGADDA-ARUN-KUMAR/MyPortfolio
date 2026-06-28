@@ -104,7 +104,7 @@ function ProjectCard({ project, onClick, index }) {
         />
       )}
 
-      <div className="rounded-2xl overflow-hidden border border-border/30 bg-card/15 backdrop-blur-xs hover:border-primary/30 transition-all duration-500">
+      <div className="rounded-2xl overflow-hidden border border-border/60 bg-card/50 backdrop-blur-sm hover:border-primary/30 transition-all duration-500">
         {/* Image */}
         <div className="aspect-[16/10] w-full overflow-hidden bg-card/30 relative">
           <img
@@ -125,13 +125,13 @@ function ProjectCard({ project, onClick, index }) {
             {project.tags.slice(0, 4).map((tag, i) => (
               <span
                 key={i}
-                className="px-2.5 py-1 text-[10px] font-mono tracking-wider border border-border/30 rounded-md bg-card/30 text-muted-foreground"
+                className="px-2.5 py-1 text-[10px] font-mono tracking-wider border border-border rounded-md bg-card/60 text-foreground/70"
               >
                 {tag}
               </span>
             ))}
             {project.tags.length > 4 && (
-              <span className="px-2.5 py-1 text-[10px] font-mono border border-border/20 rounded-md text-muted-foreground/50">
+              <span className="px-2.5 py-1 text-[10px] font-mono border border-border/40 rounded-md text-foreground/50">
                 +{project.tags.length - 4}
               </span>
             )}
@@ -144,7 +144,7 @@ function ProjectCard({ project, onClick, index }) {
             <p className="text-xs text-primary/70 font-medium mt-1">{project.subtitle}</p>
           </div>
 
-          <p className="text-muted-foreground text-xs leading-relaxed line-clamp-3">
+          <p className="text-foreground/70 text-sm leading-relaxed line-clamp-3">
             {project.description}
           </p>
 
@@ -154,7 +154,7 @@ function ProjectCard({ project, onClick, index }) {
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg border border-border/30 bg-card/20 hover:border-primary/50 hover:text-primary transition-all duration-300 text-muted-foreground"
+                className="p-2 rounded-lg border border-border bg-card/50 hover:border-primary/50 hover:text-primary transition-all duration-300 text-foreground/60"
                 onClick={(e) => e.stopPropagation()}
                 title="View Source"
                 data-cursor-hover
@@ -166,7 +166,7 @@ function ProjectCard({ project, onClick, index }) {
                   href={project.demoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded-lg border border-border/30 bg-card/20 hover:border-primary/50 hover:text-primary transition-all duration-300 text-muted-foreground"
+                  className="p-2 rounded-lg border border-border bg-card/50 hover:border-primary/50 hover:text-primary transition-all duration-300 text-foreground/60"
                   onClick={(e) => e.stopPropagation()}
                   title="Live Demo"
                   data-cursor-hover

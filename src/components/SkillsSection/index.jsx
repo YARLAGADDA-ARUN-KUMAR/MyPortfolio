@@ -84,14 +84,14 @@ function SkillPill({ skill, categoryColor, delay, isHighlighted }) {
         className={`
           relative px-4 py-2.5 rounded-xl border transition-all duration-500 cursor-default
           ${isHighlighted
-            ? "border-primary/50 bg-primary/10 shadow-[0_0_20px_rgba(139,92,246,0.15)]"
-            : "border-border/40 bg-card/20 hover:border-primary/30 hover:bg-card/40"
+            ? "border-primary/50 bg-primary/15 shadow-[0_0_20px_rgba(139,92,246,0.15)]"
+            : "border-border bg-card/50 hover:border-primary/30 hover:bg-card/70"
           }
         `}
       >
         <div className="flex items-center justify-between gap-4">
           <span className="text-sm font-medium text-foreground">{skill.name}</span>
-          <span className="text-[10px] font-mono text-muted-foreground/60">
+          <span className="text-[11px] font-mono text-foreground/60">
             {skill.level}%
           </span>
         </div>
@@ -101,7 +101,7 @@ function SkillPill({ skill, categoryColor, delay, isHighlighted }) {
           <motion.div
             className="h-full rounded-full"
             style={{
-              background: `rgba(${categoryColor}, 0.6)`,
+              background: `rgba(${categoryColor}, 0.8)`,
             }}
             initial={{ width: 0 }}
             whileInView={{ width: `${skill.level}%` }}

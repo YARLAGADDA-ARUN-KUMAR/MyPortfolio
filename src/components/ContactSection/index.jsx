@@ -68,7 +68,7 @@ export const ContactSection = () => {
           >
             <div className="space-y-6">
               <h3 className="text-xl font-display font-bold text-left">Contact Info</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed text-left">
+              <p className="text-foreground/70 text-sm leading-relaxed text-left">
                 You can reach me directly through email or phone. I'm currently based in
                 Andhra Pradesh, India, and open to remote roles.
               </p>
@@ -78,14 +78,14 @@ export const ContactSection = () => {
               {/* Email */}
               <a
                 href="mailto:arunkumaryarlagadda01@gmail.com"
-                className="group flex items-center gap-4 p-4 rounded-xl border border-border/30 bg-card/15 hover:bg-card/30 hover:border-primary/30 transition-all duration-500"
+                className="group flex items-center gap-4 p-4 rounded-xl border border-border/60 bg-card/50 hover:bg-card/80 hover:border-primary/30 transition-all duration-500"
                 data-cursor-hover
               >
                 <div className="p-3 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
                   <Mail size={18} />
                 </div>
                 <div className="text-left">
-                  <p className="text-[10px] font-mono tracking-wider text-muted-foreground/50 uppercase">Email</p>
+                  <p className="text-[10px] font-mono tracking-wider text-foreground/50 uppercase">Email</p>
                   <p className="text-sm font-medium text-foreground break-all">
                     arunkumaryarlagadda01@gmail.com
                   </p>
@@ -95,14 +95,14 @@ export const ContactSection = () => {
               {/* Phone */}
               <a
                 href="tel:+916304518854"
-                className="group flex items-center gap-4 p-4 rounded-xl border border-border/30 bg-card/15 hover:bg-card/30 hover:border-primary/30 transition-all duration-500"
+                className="group flex items-center gap-4 p-4 rounded-xl border border-border/60 bg-card/50 hover:bg-card/80 hover:border-primary/30 transition-all duration-500"
                 data-cursor-hover
               >
                 <div className="p-3 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
                   <Phone size={18} />
                 </div>
                 <div className="text-left">
-                  <p className="text-[10px] font-mono tracking-wider text-muted-foreground/50 uppercase">Phone</p>
+                  <p className="text-[10px] font-mono tracking-wider text-foreground/50 uppercase">Phone</p>
                   <p className="text-sm font-medium text-foreground">+91 6304518854</p>
                 </div>
               </a>
@@ -114,7 +114,7 @@ export const ContactSection = () => {
                 href="https://github.com/YARLAGADDA-ARUN-KUMAR"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl border border-border/30 bg-card/15 hover:border-primary/30 hover:text-primary transition-all duration-300 text-sm font-medium text-muted-foreground"
+                className="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl border border-border/60 bg-card/50 hover:border-primary/30 hover:text-primary transition-all duration-300 text-sm font-medium text-foreground/70"
                 data-cursor-hover
               >
                 <Github size={16} /> GitHub
@@ -123,7 +123,7 @@ export const ContactSection = () => {
                 href="https://linkedin.com/in/arun-kumar-yarlagadda"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl border border-border/30 bg-card/15 hover:border-primary/30 hover:text-primary transition-all duration-300 text-sm font-medium text-muted-foreground"
+                className="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl border border-border/60 bg-card/50 hover:border-primary/30 hover:text-primary transition-all duration-300 text-sm font-medium text-foreground/70"
                 data-cursor-hover
               >
                 <Linkedin size={16} /> LinkedIn
@@ -139,7 +139,7 @@ export const ContactSection = () => {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="p-8 rounded-2xl border border-border/30 bg-card/15 backdrop-blur-xs relative overflow-hidden h-full flex flex-col justify-center">
+            <div className="p-8 rounded-2xl border border-border/60 bg-card/50 backdrop-blur-sm relative overflow-hidden h-full flex flex-col justify-center">
               {/* Subtle glow */}
               <div className="absolute -top-24 -right-24 w-48 h-48 rounded-full bg-primary/5 blur-3xl" />
 
@@ -147,7 +147,7 @@ export const ContactSection = () => {
                 <div>
                   <label
                     htmlFor="contact-name"
-                    className="block text-xs font-mono tracking-wider text-muted-foreground/60 mb-2 text-left uppercase"
+                    className="block text-xs font-mono tracking-wider text-foreground/50 mb-2 text-left uppercase"
                   >
                     Your Name
                   </label>
@@ -158,7 +158,7 @@ export const ContactSection = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 rounded-xl border border-border/30 bg-background/50 focus:outline-none focus:ring-1 focus:ring-primary/40 focus:border-primary/40 transition-all duration-300 text-sm text-foreground placeholder:text-muted-foreground/30"
+                    className="w-full px-4 py-3 rounded-xl border border-border bg-background/80 focus:outline-none focus:ring-1 focus:ring-primary/40 focus:border-primary/40 transition-all duration-300 text-sm text-foreground placeholder:text-foreground/30"
                     placeholder="Enter your name"
                   />
                 </div>
@@ -166,7 +166,7 @@ export const ContactSection = () => {
                 <div>
                   <label
                     htmlFor="contact-email"
-                    className="block text-xs font-mono tracking-wider text-muted-foreground/60 mb-2 text-left uppercase"
+                    className="block text-xs font-mono tracking-wider text-foreground/50 mb-2 text-left uppercase"
                   >
                     Email Address
                   </label>
@@ -177,7 +177,7 @@ export const ContactSection = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 rounded-xl border border-border/30 bg-background/50 focus:outline-none focus:ring-1 focus:ring-primary/40 focus:border-primary/40 transition-all duration-300 text-sm text-foreground placeholder:text-muted-foreground/30"
+                    className="w-full px-4 py-3 rounded-xl border border-border bg-background/80 focus:outline-none focus:ring-1 focus:ring-primary/40 focus:border-primary/40 transition-all duration-300 text-sm text-foreground placeholder:text-foreground/30"
                     placeholder="name@example.com"
                   />
                 </div>
@@ -185,7 +185,7 @@ export const ContactSection = () => {
                 <div>
                   <label
                     htmlFor="contact-message"
-                    className="block text-xs font-mono tracking-wider text-muted-foreground/60 mb-2 text-left uppercase"
+                    className="block text-xs font-mono tracking-wider text-foreground/50 mb-2 text-left uppercase"
                   >
                     Message
                   </label>
@@ -196,7 +196,7 @@ export const ContactSection = () => {
                     onChange={handleChange}
                     required
                     rows="4"
-                    className="w-full px-4 py-3 rounded-xl border border-border/30 bg-background/50 focus:outline-none focus:ring-1 focus:ring-primary/40 focus:border-primary/40 transition-all duration-300 text-sm text-foreground resize-none placeholder:text-muted-foreground/30"
+                    className="w-full px-4 py-3 rounded-xl border border-border bg-background/80 focus:outline-none focus:ring-1 focus:ring-primary/40 focus:border-primary/40 transition-all duration-300 text-sm text-foreground resize-none placeholder:text-foreground/30"
                     placeholder="Write your message here..."
                   />
                 </div>

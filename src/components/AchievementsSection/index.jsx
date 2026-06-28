@@ -58,7 +58,7 @@ export const AchievementsSection = () => {
           {achievements.map((achievement, index) => (
             <motion.div
               key={index}
-              className="group p-8 rounded-2xl border border-border/30 bg-card/15 backdrop-blur-xs hover:border-primary/30 hover:bg-card/30 transition-all duration-500 flex flex-col justify-between text-left relative overflow-hidden"
+              className="group p-8 rounded-2xl border border-border/60 bg-card/50 backdrop-blur-sm hover:border-primary/30 hover:bg-card/70 transition-all duration-500 flex flex-col justify-between text-left relative overflow-hidden"
               initial={{ opacity: 0, y: 50, rotateX: -5 }}
               whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
               viewport={{ once: true, amount: 0.3 }}
@@ -79,7 +79,7 @@ export const AchievementsSection = () => {
                   <div className="p-3 rounded-xl bg-card/40 border border-border/30 group-hover:border-primary/20 transition-all duration-300">
                     {achievement.icon}
                   </div>
-                  <span className="px-3 py-1 rounded-full text-[10px] font-mono tracking-wider bg-primary/10 text-primary/80 border border-primary/20">
+                  <span className="px-3 py-1 rounded-full text-[10px] font-mono tracking-wider bg-primary/15 text-primary border border-primary/30">
                     {achievement.year}
                   </span>
                 </div>
@@ -88,7 +88,7 @@ export const AchievementsSection = () => {
                   <h3 className="text-lg font-display font-bold text-foreground leading-snug">
                     {achievement.title}
                   </h3>
-                  <p className="text-xs font-mono tracking-[0.1em] text-primary/60 mt-1.5 uppercase">
+                  <p className="text-xs font-mono tracking-[0.1em] text-primary/80 mt-1.5 uppercase">
                     {achievement.event}
                   </p>
                 </div>
@@ -97,7 +97,7 @@ export const AchievementsSection = () => {
                   {achievement.details.map((detail, idx) => (
                     <motion.li
                       key={idx}
-                      className="flex gap-3 items-start text-xs text-muted-foreground leading-relaxed"
+                      className="flex gap-3 items-start text-sm text-foreground/80 leading-relaxed"
                       initial={{ opacity: 0, x: -10 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
@@ -106,7 +106,7 @@ export const AchievementsSection = () => {
                         delay: 0.3 + idx * 0.1,
                       }}
                     >
-                      <CheckCircle size={14} className="text-emerald-500/70 shrink-0 mt-0.5" />
+                      <CheckCircle size={14} className="text-emerald-400 shrink-0 mt-0.5" />
                       <span>{detail}</span>
                     </motion.li>
                   ))}
